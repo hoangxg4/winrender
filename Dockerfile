@@ -1,9 +1,6 @@
 # Use a Windows Server 2022 base image
 FROM mcr.microsoft.com/windows/servercore:ltsc2022-amd64
 
-# Copy the .env file into the container
-COPY .env .
-
 # Install required dependencies
 RUN Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
 RUN Expand-Archive ngrok.zip
