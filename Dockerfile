@@ -8,8 +8,8 @@ COPY .env .
 RUN Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
 RUN Expand-Archive ngrok.zip
 
-# Set the NGROK_AUTH_TOKEN environment variable from the .env file
-ENV NGROK_AUTH_TOKEN=$(Get-Content .\.env -Name NGROK_AUTH_TOKEN)
+# Set the NGROK_AUTH_TOKEN environment variable
+ENV NGROK_AUTH_TOKEN=1wOBiyieGdM0TEoffSyszMYCfnL_56xVrqJRj9sZj3Y7FxdpS
 
 # Enable Remote Desktop
 RUN Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
