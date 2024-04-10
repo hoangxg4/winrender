@@ -2,7 +2,9 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2022-amd64
 
 # Install required dependencies
-RUN powershell -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip"
+RUN powershell -Command "Invoke-WebRequest -Uri https://curl.se/windows/curl-7.84.0-win64.zip -OutFile curl.zip"
+RUN powershell -Command "Expand-Archive -Path curl.zip -DestinationPath ."
+RUN .\curl.exe -o ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip
 RUN powershell -Command "Expand-Archive -Path ngrok.zip -DestinationPath ."
 
 # Set the NGROK_AUTH_TOKEN environment variable
