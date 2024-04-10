@@ -9,13 +9,13 @@ RUN Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windo
 RUN Expand-Archive ngrok.zip
 
 # Set the NGROK_AUTH_TOKEN environment variable from the .env file
-ENV NGROK_AUTH_TOKEN=$(Get-Content -Path .env -Name NGROK_AUTH_TOKEN)
+ENV NGROK_AUTH_TOKEN=$(Get-Content .\.env -Name NGROK_AUTH_TOKEN)
 
 # Enable Remote Desktop
-RUN Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -Value 0
+RUN Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
 RUN Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-RUN Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-RUN Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+RUN Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
+RUN New-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
 
 # Create the ngrok tunnel
 CMD ["./ngrok/ngrok.exe", "tcp", "3389"]
