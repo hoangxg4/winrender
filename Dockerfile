@@ -1,5 +1,5 @@
-# Use a Windows Server 2022 base image
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+# Use a Windows Nano Server 1809 base image
+FROM mcr.microsoft.com/windows/nanoserver:1809
 
 # Copy the .env file into the container
 COPY .env .
